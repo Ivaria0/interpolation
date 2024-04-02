@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string.h>
-#include "stdlib.h"
+#include <stdlib.h>
 #include <fstream>
 #include <iomanip>
 #include <math.h>
@@ -126,7 +126,7 @@ void main()
 	double *Y = new double[n + 1];
 	Table(X, Y, n);
 	double t;
-	/*cout << "Enter your parameter: ";
+	cout << "Enter your parameter: ";
 	cin >> t;
 	cout << Lagrange(X, Y, t, n) << endl;
 	cout << Newton(X, Y, t, n) << endl;*/
@@ -149,7 +149,7 @@ void main()
 	fnew.close();
 	fden.close();
 	Cheb(X, Y, n);
-	/*cout << "Enter your parameter (Chebyshov): ";
+	cout << "Enter your parameter (Chebyshov): ";
 	cin >> t;
 	cout << Lagrange(X, Y, t, n) << endl;
 	cout << Newton(X, Y, t, n) << endl;*/

@@ -122,20 +122,27 @@ void main()
 	int n;
 	cout << "Enter the degree: ";
 	cin >> n;
+	
 	double *X = new double[n + 1];
 	double *Y = new double[n + 1];
+	
 	Table(X, Y, n);
+	
 	double t;
 	cout << "Enter your parameter: ";
 	cin >> t;
+	
 	cout << Lagrange(X, Y, t, n) << endl;
-	cout << Newton(X, Y, t, n) << endl;*/
+	cout << Newton(X, Y, t, n) << endl;
+	
 	ofstream fout("lagrange.txt", ios_base::out | ios_base::trunc);
 	ofstream fnew("newton.txt", ios_base::out | ios_base::trunc);
 	ofstream fdev("deviation.txt", ios_base::out | ios_base::trunc);
 	ofstream fden("deviatn.txt", ios_base::out | ios_base::trunc);
 	ofstream fdevp("deviatpr.txt", ios_base::out | ios_base::trunc);
+	
 	int k = n * 10;
+	
 	for (int i = 0; i <= k; i++) {
 		t = X[0] + i * (b - a) / k;
 		fout << t << " " << Lagrange(X, Y, t, n) << endl;
@@ -144,20 +151,26 @@ void main()
 		fden << t << " " << abs(f(t) - Newton(X, Y, t, n)) << endl;
 		fdevp << t << " " << Deviation(X, Y, t, n) << endl;
 	}
+	
 	fout.close();
 	fdev.close();
 	fnew.close();
 	fden.close();
+	
 	Cheb(X, Y, n);
+	
 	cout << "Enter your parameter (Chebyshov): ";
 	cin >> t;
+	
 	cout << Lagrange(X, Y, t, n) << endl;
-	cout << Newton(X, Y, t, n) << endl;*/
+	cout << Newton(X, Y, t, n) << endl;
+		
 	ofstream fch("lagrch.txt", ios_base::out | ios_base::trunc);
 	ofstream fnch("newch.txt", ios_base::out | ios_base::trunc);
 	ofstream fdevc("devch.txt", ios_base::out | ios_base::trunc);
 	ofstream fdenc("devnch.txt", ios_base::out | ios_base::trunc);
 	ofstream fdepc("deviatpch.txt", ios_base::out | ios_base::trunc);
+	
 	for (int i = 0; i <= k; i++) {
 		t = a + i * (b - a) / k;
 		fch << t << " " << Lagrange(X, Y, t, n) << endl;
@@ -166,38 +179,49 @@ void main()
 		fdenc << t << " " << abs(f(t) - Newton(X, Y, t, n)) << endl;
 		fdepc << t << " " << Deviation(X, Y, t, n) << endl;
 	}
+	
 	fch.close();
 	fdevc.close();
 	fnch.close();
 	fdenc.close();
+	
 	delete X;
 	delete Y;
+	
 	ofstream fnlg("nlagrange.txt", ios_base::out | ios_base::trunc);
 	ofstream fnlch("nlagrch.txt", ios_base::out | ios_base::trunc);
 	ofstream fnnew("nnewton.txt", ios_base::out | ios_base::trunc);
 	ofstream fnnch("nnewch.txt", ios_base::out | ios_base::trunc);
+	
 	double X1[100];
 	double Y1[100];
 	double X2[100];
 	double Y2[100];
 	double ml, mn, mlc, mnc, s;
+	
 	for (n = 0; n < 100; n++) {
 		Table1(X1, Y1, n);
 		Cheb(X2, Y2, n);
+		
 		k = n * 5;
 		ml = 0;
 		mn = 0;
 		mlc = 0;
 		mnc = 0;
+		
 		for (int i = 0; i <= k; i++) {
 			t = a + i * (b - a) / k;
 			s = abs(f(t) - Lagrange(X1, Y1, t, n));
+			
 			if (s > ml) ml = s;
 			s = abs(f(t) - Newton(X1, Y1, t, n));
+			
 			if (s > mn) mn = s;
 			s = abs(f(t) - Lagrange(X2, Y2, t, n));
+			
 			if (s > mlc) mlc = s;
 			s = abs(f(t) - Newton(X2, Y2, t, n));
+			
 			if (s > mnc) mnc = s;
 		}
 		fnlg << n << " " << ml << endl;
@@ -205,6 +229,7 @@ void main()
 		fnlch << n << " " << mlc << endl;
 		fnnch << n << " " << mnc << endl;
 	}
+	
 	fnlg.close();
 	fnnew.close();
 	fnlch.close();
